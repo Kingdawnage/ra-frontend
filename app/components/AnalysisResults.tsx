@@ -14,7 +14,7 @@ const AnalysisResults = ({
   return (
     <div className="w-full max-w-md p-6">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold">Analysis Results</h2>
+        <h2 className="text-xl font-semibold text-gray-900">Analysis Results</h2>
         <div className="flex space-x-2">
           <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg">
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -38,8 +38,8 @@ const AnalysisResults = ({
       <div className="space-y-6">
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm font-medium">Skills Match</span>
-            <span className="text-sm text-gray-600">{skillsMatch}%</span>
+            <span className="text-sm font-medium text-gray-900">Skills Match</span>
+            <span className="text-sm text-gray-900">{skillsMatch}%</span>
           </div>
           <div className="h-2 bg-gray-200 rounded-full">
             <div 
@@ -51,8 +51,8 @@ const AnalysisResults = ({
 
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm font-medium">Experience Level</span>
-            <span className="text-sm text-gray-600">{experienceLevel}%</span>
+            <span className="text-sm font-medium text-gray-900">Experience Level</span>
+            <span className="text-sm text-gray-900">{experienceLevel}%</span>
           </div>
           <div className="h-2 bg-gray-200 rounded-full">
             <div 
@@ -64,8 +64,8 @@ const AnalysisResults = ({
 
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm font-medium">Education</span>
-            <span className="text-sm text-gray-600">{education}%</span>
+            <span className="text-sm font-medium text-gray-900">Education</span>
+            <span className="text-sm text-gray-900">{education}%</span>
           </div>
           <div className="h-2 bg-gray-200 rounded-full">
             <div 

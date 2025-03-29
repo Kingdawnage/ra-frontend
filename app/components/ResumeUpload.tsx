@@ -1,20 +1,41 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, Dispatch, SetStateAction } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { uploadAndAnalyzeResume, ResumeAnalysis } from '@/app/services/resume';
 
 interface ResumeUploadProps {
-  onFileUpload: () => void;
+  onFileUpload: (analysisResult: ResumeAnalysis) => void;
   isAnalyzing?: boolean;
+  setIsAnalyzing: Dispatch<SetStateAction<boolean>>;
 }
 
-const ResumeUpload = ({ onFileUpload, isAnalyzing = false }: ResumeUploadProps) => {
+const ResumeUpload = ({ onFileUpload, isAnalyzing = false, setIsAnalyzing }: ResumeUploadProps) => {
   const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState<string>('');
+  const [uploadStatus, setUploadStatus] = useState<string>('');
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length > 0 && !isAnalyzing) {
-      setFile(acceptedFiles[0]);
-      onFileUpload();
+      const uploadedFile = acceptedFiles[0];
+      setFile(uploadedFile);
+      setError('');
+      setUploadStatus('Uploading resume...');
+      setIsAnalyzing(true);
+
+      try {
+        setUploadStatus('Analyzing resume...');
+        const analysisResult = await uploadAndAnalyzeResume(uploadedFile);
+        onFileUpload(analysisResult);
+        setUploadStatus('');
+      } catch (err) {
+        console.error('Upload error:', err);
+        setError(err instanceof Error ? err.message : 'Failed to analyze resume');
+        setFile(null);
+        setUploadStatus('');
+      } finally {
+        setIsAnalyzing(false);
+      }
     }
-  }, [onFileUpload, isAnalyzing]);
+  }, [onFileUpload, isAnalyzing, setIsAnalyzing]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -29,6 +50,12 @@ const ResumeUpload = ({ onFileUpload, isAnalyzing = false }: ResumeUploadProps) 
 
   return (
     <div className="w-full max-w-md mx-auto p-6">
+      {error && (
+        <div className="mb-4 p-4 bg-red-50 rounded-lg">
+          <p className="text-red-700 text-sm">{error}</p>
+        </div>
+      )}
+
       <div
         {...getRootProps()}
         className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors
@@ -45,10 +72,10 @@ const ResumeUpload = ({ onFileUpload, isAnalyzing = false }: ResumeUploadProps) 
           <div>
             <h3 className="text-lg font-medium mb-1">Upload Your Resume</h3>
             <p className="text-sm text-gray-500">
-              {isAnalyzing 
+              {uploadStatus || (isAnalyzing 
                 ? 'Analysis in progress...' 
                 : 'Drag and drop your resume or click to browse'
-              }
+              )}
             </p>
           </div>
           <button 
@@ -63,11 +90,20 @@ const ResumeUpload = ({ onFileUpload, isAnalyzing = false }: ResumeUploadProps) 
           </p>
         </div>
       </div>
-      {file && (
+      {file && !error && !uploadStatus && (
         <div className="mt-4 p-4 bg-green-50 rounded-lg">
           <p className="text-green-700 text-sm">
             Selected file: {file.name}
           </p>
+        </div>
+      )}
+      {uploadStatus && (
+        <div className="mt-4 p-4 bg-blue-50 rounded-lg flex items-center">
+          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <p className="text-blue-700 text-sm">{uploadStatus}</p>
         </div>
       )}
     </div>
