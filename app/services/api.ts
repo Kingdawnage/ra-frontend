@@ -3,7 +3,9 @@
  */
 
 // Get the API URL from environment variables
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+// In development: http://localhost:8080
+// In Docker: http://backend:8080
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
 
 /**
  * Common headers for API requests
