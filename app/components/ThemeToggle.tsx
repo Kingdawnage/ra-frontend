@@ -3,17 +3,28 @@
 import { useTheme } from './ThemeProvider';
 
 type ThemeToggleProps = {
-  position?: 'fixed' | 'absolute';
+  position?: 'fixed' | 'absolute' | 'relative';
   className?: string;
 };
 
 export function ThemeToggle({ position = 'fixed', className = '' }: ThemeToggleProps) {
   const { theme, toggleTheme } = useTheme();
 
+  const positionClasses = {
+    fixed: 'fixed top-4 right-4',
+    absolute: 'absolute top-4 right-4',
+    relative: 'relative'
+  };
+
   return (
     <button
       onClick={toggleTheme}
-      className={`${position === 'fixed' ? 'fixed top-4 right-4' : 'absolute top-4 right-4'} p-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-200 text-xl ${className}`}
+      className={`${positionClasses[position]} rounded-lg 
+        ${theme === 'light' 
+          ? 'bg-gray-100 text-gray-900 hover:bg-gray-200' 
+          : 'bg-gray-700 text-white hover:bg-gray-600'
+        } 
+        transition-colors duration-200 ${className}`}
       aria-label="Toggle theme"
     >
       {theme === 'light' ? '🌙' : '☀️'}

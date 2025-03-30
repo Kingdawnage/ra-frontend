@@ -70,22 +70,22 @@ const ImprovementSuggestions = ({ analysis }: ImprovementSuggestionsProps) => {
   const suggestions = getSuggestionsFromAnalysis(analysis);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-6">Improvement Suggestions</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div className="w-full max-w-4xl p-6">
+      <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">Improvement Suggestions</h2>
+      <div className="grid grid-cols-1 gap-4">
         {suggestions.map((suggestion, index) => (
-          <div
+          <div 
             key={index}
-            className={`bg-blue-50 rounded-lg p-6 transition-transform hover:scale-105
-              ${suggestion.priority === 'high' ? 'border-l-4 border-red-500' : ''}
-              ${suggestion.priority === 'medium' ? 'border-l-4 border-yellow-500' : ''}
-              ${suggestion.priority === 'low' ? 'border-l-4 border-green-500' : ''}`}
+            className={`bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6
+              ${suggestion.priority === 'high' ? 'border-l-4 border-red-500 dark:border-red-400' : ''}
+              ${suggestion.priority === 'medium' ? 'border-l-4 border-yellow-500 dark:border-yellow-400' : ''}
+              ${suggestion.priority === 'low' ? 'border-l-4 border-green-500 dark:border-green-400' : ''}`}
           >
             <div className="flex items-start space-x-4">
               <span className="text-2xl">{suggestion.icon}</span>
               <div>
-                <h3 className="font-medium text-gray-900 mb-2">{suggestion.title}</h3>
-                <p className="text-sm text-gray-700">{suggestion.description}</p>
+                <h3 className="font-medium text-gray-900 dark:text-white mb-2">{suggestion.title}</h3>
+                <p className="text-sm text-gray-700 dark:text-gray-300">{suggestion.description}</p>
               </div>
             </div>
           </div>
