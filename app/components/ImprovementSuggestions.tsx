@@ -1,27 +1,73 @@
+import { ResumeAnalysis } from '@/app/services/resume';
+
 interface Suggestion {
   icon: string;
   title: string;
   description: string;
+  priority: 'high' | 'medium' | 'low';
+  section?: string;
 }
 
-const ImprovementSuggestions = () => {
-  const suggestions: Suggestion[] = [
-    {
-      icon: '💡',
-      title: 'Add More Keywords',
-      description: 'Include industry-specific keywords to improve visibility'
-    },
-    {
-      icon: '📊',
-      title: 'Quantify Achievements',
-      description: 'Add metrics and numbers to showcase your impact'
-    },
-    {
+interface ImprovementSuggestionsProps {
+  analysis: ResumeAnalysis;
+}
+
+const getSectionIcon = (section: string): string => {
+  const icons: Record<string, string> = {
+    Education: '🎓',
+    Experience: '💼',
+    Skills: '🔧',
+    Profile: '👤',
+    Name: '📝'
+  };
+  return icons[section] || '📝';
+};
+
+const getSuggestionsFromAnalysis = (analysis: ResumeAnalysis): Suggestion[] => {
+  const suggestions: Suggestion[] = [];
+  
+  // Add general feedback
+  if (analysis.feedback.general) {
+    suggestions.push({
       icon: '📝',
-      title: 'Format Consistency',
-      description: 'Maintain consistent formatting throughout your resume'
+      title: 'Overall Structure',
+      description: analysis.feedback.general,
+      priority: 'high'
+    });
+  }
+
+  // Add section-specific feedback
+  Object.entries(analysis.feedback.sections).forEach(([section, feedback]) => {
+    if (feedback) {
+      suggestions.push({
+        icon: getSectionIcon(section),
+        title: `${section} Section`,
+        description: feedback,
+        priority: 'medium',
+        section
+      });
     }
-  ];
+  });
+
+  // Add score-based suggestions
+  const scores = analysis.scores.section_scores;
+  Object.entries(scores).forEach(([section, score]) => {
+    if (score < 0.7) {
+      suggestions.push({
+        icon: getSectionIcon(section),
+        title: `Improve ${section} Section`,
+        description: `Your ${section.toLowerCase()} section could use improvement. Consider adding more details or reorganizing the content.`,
+        priority: 'high',
+        section
+      });
+    }
+  });
+
+  return suggestions;
+};
+
+const ImprovementSuggestions = ({ analysis }: ImprovementSuggestionsProps) => {
+  const suggestions = getSuggestionsFromAnalysis(analysis);
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6">
@@ -30,7 +76,10 @@ const ImprovementSuggestions = () => {
         {suggestions.map((suggestion, index) => (
           <div
             key={index}
-            className="bg-blue-50 rounded-lg p-6 transition-transform hover:scale-105"
+            className={`bg-blue-50 rounded-lg p-6 transition-transform hover:scale-105
+              ${suggestion.priority === 'high' ? 'border-l-4 border-red-500' : ''}
+              ${suggestion.priority === 'medium' ? 'border-l-4 border-yellow-500' : ''}
+              ${suggestion.priority === 'low' ? 'border-l-4 border-green-500' : ''}`}
           >
             <div className="flex items-start space-x-4">
               <span className="text-2xl">{suggestion.icon}</span>

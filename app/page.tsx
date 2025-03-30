@@ -22,11 +22,17 @@ export default function Home() {
     experienceLevel: 0,
     education: 0,
   });
+  const [fullAnalysis, setFullAnalysis] = useState<ResumeAnalysis | null>(null);
 
   const handleFileUpload = async (result: ResumeAnalysis) => {
     try {
+      // Store the full analysis result
+      setFullAnalysis(result);
+      
       // Convert the analysis result to our component's format
       const scores = result.scores.section_scores;
+      // Log the scores
+      // console.log(scores);  
       
       // Convert scores to percentages (0-100)
       setAnalysisData({
@@ -62,9 +68,9 @@ export default function Home() {
             )}
           </div>
           
-          {showResults && !isAnalyzing && (
+          {showResults && !isAnalyzing && fullAnalysis && (
             <div className="mt-12">
-              <ImprovementSuggestions />
+              <ImprovementSuggestions analysis={fullAnalysis} />
             </div>
           )}
         </div>
