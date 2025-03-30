@@ -3,6 +3,7 @@ version: '3.4'
 services:
   rafrontend:
     image: kingdawnage/ra-frontend:latest
+    container_name: ra-frontend
     build:
       context: .
       dockerfile: ./Dockerfile

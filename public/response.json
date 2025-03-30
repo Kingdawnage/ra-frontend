@@ -1,0 +1,44 @@
+{
+  "status": "success",
+  "data": {
+    "resume": {
+      "id": "a6766ad5-40dd-4a48-8b01-cfa834af723d",
+      "user_id": "cfe4afce-f95c-4b61-894b-3099d9cc14f6",
+      "file_path": "./uploads/temp/2025 CV.pdf",
+      "analysis_result": {
+        "debug": { "token_logits_shape": [1, 512, 5] },
+        "entities": {
+          "Education": "Sept 2019 Feb 2023\nUniversity of Debrecen\nMechatronics Engineering Bsc\n\nSept 2023 June 2025\nBudapest University of Technology and Economics\nAutonomous Vehicle Control Engineering MSc\n\nWORK",
+          "Experience": "Technical Trainee\nDozzy Group, Anambra, Nigeria\nJuly 2022 Sept 2022\nResolved technical and operational issues with equipment resulting in a 17% increase in\n\nproductivity\nAssisted technicians in complex repairs, resulting in a 42% improvement in repair time\nPerformed routine system checks and inspections to ensure equipment was functioning properly\nCommunicated effectively with team members and supervisors to ensure tasks were completed on\ntime and within budget\n\nFreelance Developer\nRemote\n\nMarch 2023 Present\nMEDICAL RECORDS WEB APP: Developed a robust backend for a client s web application\nthat securely stores user medical records using Axum(Rust) and PostgreSQL. Implemented\nadvanced security measures including cookies, RBAC, token-based authentication(JWT) and\n\npassword hashing to safeguard sensitive data. Optimized data retrieval processes reducing query\n\ntimes by 40% while ensuring compliance with industry standards.\nAUDIO TRANSCRIPTION SERVICE: Designed and implemented a backend service for and\napp that transcribes audio to text by leveraging OpenAI s api. Enhanced transcription processing\nspeed and achieved a 95% accuracy rate from real time tests.\nFOOD STORE AND DELIVERY APP: Involved in the backend development of a food store\nand delivery platform for a client by integrating order management, payment processing and\ndelivery tracking systems.\n\nGameplay Engineer Intern\nGalactic Fleet, Budapest, Hungary\n\nApril 2024 Present\nPartnered with a multidisciplinary team of 8 to streamline workflows and enhance overall game\ndesign quality\nDeveloped and implemented over 10 core gameplay mechanics using mainly Unity(others\ninclude Defold, Godot and Unreal Engine), contributing to a 25% increase in demo performance\nduring internal reviews\nBuilt 6 interactive demos that reduced build iteration times by 30% and improved feedback scores\nby 15%\n\nParticipated in bug hunting initiatives with partners increasing bug discovery rate by 54%",
+          "Name": "Onyedikachi Ugboma",
+          "Profile": "I am a versatile software engineer with a background in mechatronics and autonomous vehicle control,\nnow diving into game development as a Gameplay Engineer Intern. I design and implement engaging\ngame mechanics and build interactive demos using modern game engines. Alongside this, I ve developed\na strong interest in backend development especially using Rust, to build robust and scalable systems. I\nenjoy blending creative design with technical problem-solving to bring innovative software solutions to\nlife.",
+          "Projects": "VOXEL TERRAIN GENERATOR : Developed a voxel terrain generator using Rust and Bevy\nthat uses procedural algorithms to create dynamic immersive landscapes. This project highlights\nefficient rendering techniques and optimized data handling in Rust.\nCNN CLASSIFIER FOR IMAGE RECOGNITION: Developed a convolutional neural\nnetwork classifier using Tensorflow to accurately distinguish between different image classes\nBREAKOUT WEB GAME CLONE: Created a web-based clone of the classic Breakout game\n\nusing Blazor\nVIDEO STABILIZATION PROGRAM: Created a python script that processes unstable\nfootage and applies stabilization algorithms to produce smoother, more professional-quality video\noutput\nRESUME ANALYZER: I developed a Resume Analyzer Web App using a Rust (Axum)\nbackend with JWT-based authentication, Argon2 password hashing, and SQLx for database\ninteractions and migrations, integrating a Python (FastAPI) microservice to handle advanced NLP\nfor resume text extraction and scoring. The application is containerized with Docker, employs\nGitHub Actions for continuous integration (builds, tests, lint checks), and deploys seamlessly to\nthe cloud. A React frontend provides a user-friendly interface for uploading resumes and\ndisplaying analysis results stored in PostgreSQL as JSON, all secured by robust authentication\nand logging practices that ensure maintainability and scalability.",
+          "Skills": "CI/CD Docker, Kubernetes, Github actions\nRust Axum, Firebase, PostgreSQL\nPython OpenCV, SUMO\nMachine Learning - Tensorflow\nC# - Unity, ASP .NET, Blazor\nCloud Frameworks\n\nUnity\nCpp/C\nJavascript/Typescript React\n\nInterests\nShader design and development (Unity Shader Graph)\nCharacter Illustration\n3D Modelling\nGraphics programming (CUDA)"
+        },
+        "feedback": {
+          "general": "Readability score is low (13.0); try simplifying sentence structure. The model indicates there is room for improvement in overall structure.",
+          "sections": {
+            "Education": "Your Education section is only 26 words; consider expanding it to at least 50 words."
+          }
+        },
+        "meta": {
+          "model_version": "1.0.0",
+          "timestamp": "2025-03-29T23:05:08.682567Z"
+        },
+        "scores": {
+          "model_score": -0.9910974502563475,
+          "overall": -0.2243487251281739,
+          "readability": 13.014420765027351,
+          "section_scores": {
+            "Education": 0.52,
+            "Experience": 1.0,
+            "Name": 1.0,
+            "Profile": 1.0,
+            "Skills": 1.0
+          }
+        }
+      },
+      "uploaded_at": "2025-03-29T23:05:08.937570Z"
+    }
+  }
+}

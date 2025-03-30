@@ -1,0 +1,19 @@
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login user
+- `POST /api/auth/logout` - Logout user
+
+### Users
+- `GET /api/users/me` - Get current user
+- `GET /api/users` - Get all users (Admin only)
+- `PUT /api/users/:id/name` - Update user name
+- `PUT /api/users/:id/role` - Update user role
+- `PUT /api/users/:id/password` - Update user password
+
+### Resumes
+- `POST /api/resumes/{user_id}/resume` - Upload resume
+- `GET /api/resumes/{user_id}/resume/{resume_id}` - Get specific resume
+- `DELETE /api/resumes/{user_id}/resume/{resume_id}` - Delete resume
+- `GET /api/resumes/{user_id}/resumes` - Get all resumes for user

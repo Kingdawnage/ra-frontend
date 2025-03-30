@@ -1,0 +1,20 @@
+output_json = {
+    "entities": entities,
+    "scores": {
+        "overall": overall_score,
+        "model_score": model_score,
+        "readability": feedback_data["readability"],
+        "section_scores": feedback_data["section_scores"]
+    },
+    "feedback": {
+        "general": feedback_data["general"],
+        "sections": feedback_data["sections"]
+    },
+    "meta": {
+        "timestamp": datetime.utcnow().isoformat() + "Z",
+        "model_version": "1.0.0"
+    },
+    "debug": {
+        "token_logits_shape": token_logits.shape.as_list()
+    }
+}
